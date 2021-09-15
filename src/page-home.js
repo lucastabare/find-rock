@@ -5,9 +5,13 @@ import logo from "./logo.svg";
 class PageHome extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.history.push("/busqueda");
+    this.props.history.push("/busqueda?" + this.state.busqueda);
   };
-
+  onChange = (e) => {
+    this.setState({
+      busqueda: e.target.value,
+    });
+  };
   state = {
     busqueda: "",
   };
@@ -22,7 +26,7 @@ class PageHome extends React.Component {
                 <div className="busqueda">
                   <input
                     name="busqueda"
-                    onChange={this.props.onChange}
+                    onChange={this.onChange}
                     type="text"
                     id="buscar"
                     value={this.props.busqueda}
