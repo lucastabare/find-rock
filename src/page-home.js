@@ -1,11 +1,19 @@
 import React from "react";
 import "./page-home.css";
 import logo from "./logo.svg";
+import ReactDOM from "react-dom";
+import Modal from "./components/modal.js";
 
 class PageHome extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.history.push("/busqueda?" + this.state.busqueda);
+  };
+  handleClick = (e) => {
+    e.preventDefault();
+    this.setState({
+      modal: true,
+    });
   };
   onChange = (e) => {
     this.setState({
@@ -14,6 +22,7 @@ class PageHome extends React.Component {
   };
   state = {
     busqueda: "",
+    modal: false,
   };
   render() {
     return (
@@ -37,12 +46,20 @@ class PageHome extends React.Component {
                   <button className="btng" type="submit">
                     Search Similiar
                   </button>
-                  <button className="btng">Escuela DevRock </button>
+                  <button className="btng" onClick={this.handleClick}>
+                    Escuela DevRock{" "}
+                  </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
+        {ReactDOM.createPortal(
+          <Modal estado={this.state.modal}>
+            <h4>Aguante DevRock</h4>
+          </Modal>,
+          document.getElementById("teleport")
+        )}
       </div>
     );
   }

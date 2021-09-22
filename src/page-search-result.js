@@ -5,21 +5,28 @@ import SearchResult from "./components/search-result.js";
 import { Link } from "react-router-dom";
 
 class PageSearchResult extends Component {
-  state = {};
+  state = {
+    busqueda: "",
+  };
   componentDidMount() {
-    console.log("(componentDidMount()", "Luego del metodo render");
+    let search = this.props.history.location.search
+      .substr(1)
+      .replace("%20", " ");
+
+    this.setState({
+      busqueda: search,
+    });
   }
   componentWillMount() {
     console.log("(componentWillMount()", "Antes del metodo render");
   }
   changeHandle = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      busqueda: e.target.value,
     });
   };
 
   render() {
-    console.log("render", "estoy en el metodo render");
     return (
       <React.Fragment>
         <SearchBar

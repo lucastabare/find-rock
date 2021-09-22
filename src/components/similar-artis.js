@@ -11,30 +11,15 @@ class SimiliarArtist extends React.Component {
             <hr />
           </div>
           <div className="row">
-            <div className="col-md-3">
-              <ArtistCard
-                img="https://via.placeholder.com/350x350"
-                titulo="test loco"
-              />
-            </div>
-            <div className="col-md-3">
-              <ArtistCard
-                img="https://via.placeholder.com/350x350"
-                titulo="test loco"
-              />
-            </div>
-            <div className="col-md-3">
-              <ArtistCard
-                img="https://via.placeholder.com/350x350"
-                titulo="test loco"
-              />
-            </div>
-            <div className="col-md-3">
-              <ArtistCard
-                img="https://via.placeholder.com/350x350"
-                titulo="test loco"
-              />
-            </div>
+            {this.props.data.slice(0, 4).map((item, i) => {
+              return (
+                <ArtistCard
+                  img={item.image[3]["#text"]}
+                  titulo={item.name}
+                  key={i}
+                />
+              );
+            })}
           </div>
         </div>
       </React.Fragment>

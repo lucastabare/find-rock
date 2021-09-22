@@ -12,11 +12,15 @@ class SearchResult extends Component {
       },
     },
   };
-  componentDidMount() {
+  componentWillReceiveProps(e) {
+    let termino = e.busqueda;
     this.fetchData(
-      "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=Madona&api_key=151a4ebfb5ea98adf6927b0aa9d34c6b&format=json"
+      "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=" +
+        termino +
+        "&api_key=151a4ebfb5ea98adf6927b0aa9d34c6b&format=json"
     );
   }
+
   fetchData = async (url) => {
     this.setState({
       loading: true,
@@ -32,6 +36,7 @@ class SearchResult extends Component {
       });
     } else {
       this.setState({
+        error: false,
         loading: false,
         data: data,
       });
